@@ -4,9 +4,40 @@ export const MyContext = createContext()
 
 export const MyProvider = ({ children }) => {
 
+    const [allGroupsDataBase, setallGroupsDataBase] = useState([
+        {
+            admins: [`username1`, `username3`],
+            name: `younessGroup`,
+            description: `group description 1`,
+            members: [`username10`, `username20`],
+            content: `movies`
+        },
+        {
+            admins: [`username12`, `username2`],
+            name: `younessGroup`,
+            description: `group description 1`,
+            members: [`username10`, `username20`],
+            content: `trols`
+        }
+    ])
 
+
+
+    // ! li bgha yfhm achnahia had bio ou infos imchi ichouf lprofile dialo f facebook kayna wahed l section smitha Intro ra fiha
+    // ! wahed ajouter une bio (b7ala description 3lik nta) ou modifier les infos had infos fihom ajouter emploi ou scolarite ville actuelle Situation amoureuse Sites web ....
+    // ! infos ghaykouno 3la chkl object li fih had infos ou ghaykouno fl array dial infos li kayn 3and kola user 
+
+
+    // ^ kayn wahed database dial groups li kayna lfo9 hadik hia li ghadi it pusha fiha ayi group tzad ou wst mn dak objet dial goup ghatkoun fih admins ou members ou smia ou type dial lgroup
+    // ^ (movies, trols ....)  had database ra 7titha fl constructor ila chfto lta7t ra kayn wahed attribute smito allGroups 
+    // ^ kola user ghatkoun 3ando had database bach ila t connecta hadl user n affichiw gaa3 les groups li kaynin
+    // ^ ou 3aad kayna myGroups li kat3ni lgroups dial user li ajoutahom bach n9dro n affichiwhom hta houma ila bgha ichouf lgoups dilo 
+
+
+
+    // ~ 
     class Users {
-        constructor(firstName, lastName, userName, email, phoneNumber, password, profileImage, gender, birthDay, isAdmin, description, followers, following, groups) {
+        constructor(firstName, lastName, userName, email, phoneNumber, password, profileImage, gender, birthDay, bio, infos, isAdmin, followers, following, myGroups) {
 
             this.firstName = firstName;
             this.lastName = lastName;
@@ -18,10 +49,12 @@ export const MyProvider = ({ children }) => {
             this.gender = gender;
             this.birthDay = birthDay;
             this.isAdmin = isAdmin;
-            this.description = description;
+            this.bio = bio;
+            this.infos = infos;
             this.followers = followers;
             this.following = following;
-            this.groups = groups;
+            this.myGroups = myGroups;
+            this.allGroups = allGroupsDataBase;
         }
     }
 
@@ -34,96 +67,17 @@ export const MyProvider = ({ children }) => {
         `1234`,
         null,
         `male`,
-        `10/08/2003`,
+        `10/10/2003`,
         false,
-        `description1`,
+        `bio1`,
         [],
-        [],
-        []
-    )
-    let user2 = new Users(
-        `ghizlane`,
-        `jadraoui`,
-        `ghizlane123`,
-        `ghizlan@gmail.com`,
-        `060606060`,
-        `1234`,
-        null,
-        `female`,
-        `24/01/2002`,
-        false,
-        `description2`,
-        [],
-        [],
-        []
-    )
-    let user3 = new Users(
-        `hamza`,
-        `yasri`,
-        `hamza123`,
-        `hamza@gmail.com`,
-        `060606060`,
-        `1234`,
-        null,
-        `male`,
-        `10/08/1999`,
-        false,
-        `description3`,
-        [],
-        [],
-        []
-    )
-    let user4 = new Users(
-        `achraf`,
-        `bensabir`,
-        `achraf123`,
-        `achraf@gmail.com`,
-        `060606060`,
-        `1234`,
-        null,
-        `male`,
-        `10/08/2001`,
-        false,
-        `description4`,
-        [],
-        [],
-        []
-    )
-    let user5 = new Users(
-        `yahya`,
-        `jmilou`,
-        `yahya123`,
-        `yahya@gmail.com`,
-        `060606060`,
-        `1234`,
-        null,
-        `male`,
-        `10/08/2010`,
-        false,
-        `description5`,
-        [],
-        [],
-        []
-    )
-    let user6 = new Users(
-        `med reda`,
-        `karim`,
-        `reda123`,
-        `reda@gmail.com`,
-        `060606060`,
-        `1234`,
-        null,
-        `male`,
-        `10/08/2003`,
-        false,
-        `description6`,
         [],
         [],
         []
     )
 
     const [dataBase, setDataBase] = useState([
-        user1, user2, user3, user4, user5, user6
+        user1
     ])
 
     return (

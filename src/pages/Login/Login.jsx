@@ -3,6 +3,7 @@ import { MyContext } from "../../utils/contextProvider";
 
 export const LoginPage = () => {
     const [dataBase, setDataBase] = useContext(MyContext)
+    console.log(dataBase);
 
     return (
         <>
