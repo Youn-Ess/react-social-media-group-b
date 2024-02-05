@@ -14,6 +14,8 @@ import { ForgetPassword } from './pages/forgetPassword/ForgetPassword';
 function App() {
   return (
     <MyProvider>
+
+
       <Routes >
         <Route path='/' element={<LoginPage />} />
         <Route path='/forgetpassword' element={<ForgetPassword />} />
