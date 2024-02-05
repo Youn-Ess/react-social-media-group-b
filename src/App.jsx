@@ -13,6 +13,8 @@ import { SettingsPage } from './pages/Settings/Settings';
 function App() {
   return (
     <MyProvider>
+
+
       <Routes >
         <Route path='/' element={<LoginPage />} />
         <Route path='/home' element={<HomePage />} />
