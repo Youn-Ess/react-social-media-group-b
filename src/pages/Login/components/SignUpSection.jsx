@@ -1,11 +1,9 @@
 import { useContext, useState } from "react"
 import { MyContext } from "../../../utils/contextProvider"
 import { HiMiniXMark } from "react-icons/hi2";
-import { useNavigationType } from "react-router-dom";
-import { AddImgSection } from "./AddImgSection";
 
 export const SignUpSection = ({ step, setStep }) => {
-    const [dataBase, setDataBase, connected, setConnected] = useContext(MyContext)
+    const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
 
 
     const [firstName, setFirstName] = useState(``)
@@ -150,12 +148,12 @@ export const SignUpSection = ({ step, setStep }) => {
                     followers: [],
                     following: [],
                     myGroups: [],
-                    profileImage: null
+                    profileImage: null,
+                    coverProfileImage: null
                 }
 
                 newTab.push(user)
                 setDataBase(newTab)
-
 
                 setConnected([...connected, user])
 

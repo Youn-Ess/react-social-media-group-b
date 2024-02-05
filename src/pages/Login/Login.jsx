@@ -1,16 +1,9 @@
-import { useContext, useState } from "react";
-import { MyContext } from "../../utils/contextProvider";
-import { useSearchParams } from "react-router-dom";
-import { useSelect } from "@material-tailwind/react";
-import { FileInput, Label } from 'flowbite-react';
-import { IoCloudUploadOutline } from "react-icons/io5";
-
+import { useState } from "react";
 
 
 import { LoginSection } from "./components/LoginSection";
 import { SignUpSection } from "./components/SignUpSection";
-import { AddImgSection } from "./components/AddImgSection";
-import { SuggestionsSection } from "./components/SuggestionsSection";
+import { FillInfos } from "./components/fillInfos";
 
 
 export const LoginPage = () => {
@@ -18,16 +11,14 @@ export const LoginPage = () => {
 
     return (
         <>
-            <div className="bg-[#d6d6d6] min-h-[100vh] flex justify-center items-center">
+            <div className="bg-[#d6d6d6] min-h-[100vh] flex justify-center py-[3rem]">
                 {
                     step === 0 ?
                         <LoginSection step={step} setStep={setStep} />
                         : step === 1 ?
                             <SignUpSection step={step} setStep={setStep} />
-                            : step === 2 ?
-                                <AddImgSection step={step} setStep={setStep} />
-                                :
-                                <SuggestionsSection />
+                            :
+                            <FillInfos />
                 }
             </div>
         </>
