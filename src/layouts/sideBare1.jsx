@@ -11,7 +11,7 @@ import { IoLogOutSharp } from "react-icons/io5";
 
 
 export const SideBare1 = () => {
-    const navigat = useNavigate
+    const navigat = useNavigate()
     return (
         <div className='absolute'>
             <div className='flex flex-col outline w-[22vw] rounded-md py-3 m-5'>
@@ -23,7 +23,7 @@ export const SideBare1 = () => {
                         <Link className='font-bold bg-blue-400 p-3 text-2xl rounded-full mr-2' to={"/"}><FaHouse /></Link>
                         <h1 className='font-bold'>Home</h1>
                     </div>
-                    <div className='flex items-center'>
+                    <div className='flex items-center' onClick={()=> navigat("/Video")}>
                         <Link className='font-bold bg-gray-400 p-3 text-2xl rounded-full mr-2' to={"/"}><FaVideo /></Link>
                         <h1 className='font-bold'>Videos</h1>
                     </div>
