@@ -8,6 +8,7 @@ import { GroupsPage } from './pages/Groups/Groups';
 import { MarketPage } from './pages/Market/Market';
 import { ErrorsPage } from './pages/err/errors';
 import { SettingsPage } from './pages/Settings/Settings';
+import { ForgetPassword } from './pages/forgetPassword/ForgetPassword';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 
       <Routes >
         <Route path='/' element={<LoginPage />} />
+        <Route path='/forgetpassword' element={<ForgetPassword />} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/groups' element={<GroupsPage />} />

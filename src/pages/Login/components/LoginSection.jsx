@@ -1,9 +1,12 @@
 import { useContext, useState } from "react"
 import { MyContext } from "../../../utils/contextProvider"
+import { useNavigate } from "react-router-dom"
 
 export const LoginSection = ({ step, setStep }) => {
-    const [dataBase, setDataBase, connected, setConnected] = useContext(MyContext)
+    const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
 
+
+    const navigate = useNavigate()
 
     const nextPage = (e) => {
         e.preventDefault()
@@ -30,8 +33,10 @@ export const LoginSection = ({ step, setStep }) => {
                 // navigate(`/profile/${newTab[connectedUser].userName}`)
                 alert(`user exist`)
             } else {
-                alert("User does not exist in database")
+                alert("unvalide input username or password wrong")
             }
+        } else {
+            alert(`must fill all inputs`)
         }
     }
 
@@ -53,7 +58,7 @@ export const LoginSection = ({ step, setStep }) => {
                         <input type="password" placeholder="password" onChange={(e) => { setPassword(e.target.value) }} />
                     </div>
                     <button className="bg-light-blue-400 p-3 rounded-md" onClick={(e) => { login(e) }}>Log in</button>
-                    <p className="text-center text-[0.9rem] text-light-blue-900 hover:underline  underline-offset-2">Forgot your password ?</p>
+                    <p className="text-center text-[0.9rem] text-light-blue-900 hover:underline  underline-offset-2" onClick={() => { navigate(`/forgetpassword`) }}>Forgot your password ?</p>
                     <hr />
                     <div className="flex justify-center">
                         <button className="bg-green-600 p-3 rounded-md w-[60%]" onClick={(e) => { nextPage(e) }}>Create new account</button>

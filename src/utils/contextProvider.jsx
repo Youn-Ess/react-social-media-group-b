@@ -22,7 +22,7 @@ export const MyProvider = ({ children }) => {
         }
     ])
 
-    const [postsDataBase, setPostsDataBase] = useState([])
+    const [allPostsDataBase, setAllPostsDataBase] = useState([])
 
     const [marketPlaceDataBase, setMarketPlaceDataBase] = useState([])
 
@@ -60,13 +60,115 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
+        myStories: [],
         profileImage: null,
-        coverImage: null
+        coverProfileImage: null
+    }
+    let user2 = {
+        firstName: `ahmed`,
+        lastName: `aithaddou`,
+        userName: `ahmed12`,
+        email: `ahmed@gmail.com`,
+        phoneNumber: `06373733737`,
+        password: `ahmed123`,
+        gender: `Male`,
+        birthDay: `12/10/2003`,
+        bio: `bio1`,
+        infos:
+        {
+            jobe: `ingenieur`,
+            schooling: `m5`,
+            city: `casa`,
+            relationship: `single`
+        },
+        followers: [],
+        following: [],
+        myGroups: [],
+        myProducts: [],
+        myStories: [],
+        profileImage: null,
+        coverProfileImage: null
     }
 
+    let user3 = {
+        firstName: `achraf`,
+        lastName: `aithaddou`,
+        userName: `achraf12`,
+        email: `achraf@gmail.com`,
+        phoneNumber: `06373733737`,
+        password: `achraf123`,
+        gender: `Male`,
+        birthDay: `12/10/2003`,
+        bio: `bio1`,
+        infos:
+        {
+            jobe: `ingenieur`,
+            schooling: `m5`,
+            city: `casa`,
+            relationship: `single`
+        },
+        followers: [],
+        following: [],
+        myGroups: [],
+        myProducts: [],
+        myStories: [],
+        profileImage: null,
+        coverProfileImage: null
+    }
+    let user4 = {
+        firstName: `achraf`,
+        lastName: `aithaddou`,
+        userName: `achraf12`,
+        email: `achraf@gmail.com`,
+        phoneNumber: `06373733737`,
+        password: `achraf123`,
+        gender: `Male`,
+        birthDay: `12/10/2003`,
+        bio: `bio1`,
+        infos:
+        {
+            jobe: `ingenieur`,
+            schooling: `m5`,
+            city: `casa`,
+            relationship: `single`
+        },
+        followers: [],
+        following: [],
+        myGroups: [],
+        myProducts: [],
+        myStories: [],
+        profileImage: null,
+        coverProfileImage: null
+    }
+
+    let user5 = {
+        firstName: `achraf`,
+        lastName: `aithaddou`,
+        userName: `achraf12`,
+        email: `achraf@gmail.com`,
+        phoneNumber: `06373733737`,
+        password: `achraf123`,
+        gender: `Male`,
+        birthDay: `12/10/2003`,
+        bio: `bio1`,
+        infos:
+        {
+            jobe: `ingenieur`,
+            schooling: `m5`,
+            city: `casa`,
+            relationship: `single`
+        },
+        followers: [],
+        following: [],
+        myGroups: [],
+        myProducts: [],
+        myStories: [],
+        profileImage: null,
+        coverProfileImage: null
+    }
 
     const [dataBase, setDataBase] = useState([
-        user1
+        user1, user2, user3, user4, user5, user5
     ])
 
 
@@ -74,7 +176,7 @@ export const MyProvider = ({ children }) => {
 
     return (
         <>
-            <MyContext.Provider value={[dataBase, setDataBase, connected, setConnected]}>
+            <MyContext.Provider value={[dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase]}>
                 {children}
             </MyContext.Provider>
         </>
