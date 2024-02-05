@@ -1,40 +1,35 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "../../utils/contextProvider";
+import { useSearchParams } from "react-router-dom";
+import { useSelect } from "@material-tailwind/react";
+import { FileInput, Label } from 'flowbite-react';
+import { IoCloudUploadOutline } from "react-icons/io5";
 
-import { Input } from "@material-tailwind/react";
 
+
+import { LoginSection } from "./components/LoginSection";
+import { SignUpSection } from "./components/SignUpSection";
+import { AddImgSection } from "./components/AddImgSection";
+import { SuggestionsSection } from "./components/SuggestionsSection";
 
 
 export const LoginPage = () => {
-    const [dataBase, setDataBase] = useContext(MyContext)
-    console.log(dataBase);
-
-
-
-
+    const [step, setStep] = useState(0)
 
     return (
         <>
-            {/* <div className="bg-[#2a76e7] ">
-                <div className="w-[80%] ">
-                    <div className="">
-                        <h1>LOGO</h1>
-                        <p>description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatem.</p>
-                    </div>
-
-                    <form action="">
-                        <label htmlFor="">Email</label>
-                        
-                    </form>
-                </div>
-            </div> */}
-            <div className="w-72">
-                <Input label="Username" />
+            <div className="bg-[#d6d6d6] min-h-[100vh] flex justify-center items-center">
+                {
+                    step === 0 ?
+                        <LoginSection step={step} setStep={setStep} />
+                        : step === 1 ?
+                            <SignUpSection step={step} setStep={setStep} />
+                            : step === 2 ?
+                                <AddImgSection step={step} setStep={setStep} />
+                                :
+                                <SuggestionsSection />
+                }
             </div>
-
-
-
-
         </>
     )
 }

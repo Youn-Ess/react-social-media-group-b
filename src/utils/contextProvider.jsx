@@ -1,3 +1,4 @@
+import { logDOM } from "@testing-library/react";
 import { createContext, useState } from "react";
 
 export const MyContext = createContext()
@@ -21,7 +22,11 @@ export const MyProvider = ({ children }) => {
         }
     ])
 
+    const [postsDataBase, setPostsDataBase] = useState([])
 
+    const [marketPlaceDataBase, setMarketPlaceDataBase] = useState([])
+
+    const [storiesDataBase, setStoriesDataBase] = useState([])
 
     // ! li bgha yfhm achnahia had bio ou infos imchi ichouf lprofile dialo f facebook kayna wahed l section smitha Intro ra fiha
     // ! wahed ajouter une bio (b7ala description 3lik nta) ou modifier les infos had infos fihom ajouter emploi ou scolarite ville actuelle Situation amoureuse Sites web ....
@@ -34,55 +39,42 @@ export const MyProvider = ({ children }) => {
     // ^ ou 3aad kayna myGroups li kat3ni lgroups dial user li ajoutahom bach n9dro n affichiwhom hta houma ila bgha ichouf lgoups dilo 
 
 
-
-    // ~ 
-    class Users {
-        constructor(firstName, lastName, userName, email, phoneNumber, password, profileImage, gender, birthDay, bio, infos, isAdmin, followers, following, myGroups) {
-
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.userName = userName;
-            this.email = email;
-            this.phoneNumber = phoneNumber;
-            this.password = password;
-            this.profileImage = profileImage;
-            this.gender = gender;
-            this.birthDay = birthDay;
-            this.isAdmin = isAdmin;
-            this.bio = bio;
-            this.infos = infos;
-            this.followers = followers;
-            this.following = following;
-            this.myGroups = myGroups;
-            this.allGroups = allGroupsDataBase;
-        }
+    let user1 = {
+        firstName: `youness`,
+        lastName: `aithaddou`,
+        userName: `youness12`,
+        email: `youness@gmail.com`,
+        phoneNumber: `06373733737`,
+        password: `youness123`,
+        gender: `Male`,
+        birthDay: `12/10/2003`,
+        bio: `bio1`,
+        infos:
+        {
+            jobe: `ingenieur`,
+            schooling: `m5`,
+            city: `casa`,
+            relationship: `single`
+        },
+        followers: [],
+        following: [],
+        myGroups: [],
+        myProducts: [],
+        profileImage: null,
+        coverImage: null
     }
 
-    let user1 = new Users(
-        `youness`,
-        `aithaddou`,
-        `youness123`,
-        `youness@gmail.com`,
-        `060606060`,
-        `1234`,
-        null,
-        `male`,
-        `10/10/2003`,
-        false,
-        `bio1`,
-        [],
-        [],
-        [],
-        []
-    )
 
     const [dataBase, setDataBase] = useState([
         user1
     ])
 
+
+    const [connected, setConnected] = useState([])
+
     return (
         <>
-            <MyContext.Provider value={[dataBase, setDataBase]}>
+            <MyContext.Provider value={[dataBase, setDataBase, connected, setConnected]}>
                 {children}
             </MyContext.Provider>
         </>
