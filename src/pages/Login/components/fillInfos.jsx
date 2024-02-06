@@ -12,19 +12,23 @@ import {
     Button,
 } from "@material-tailwind/react";
 
+import { HiMiniXMark } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 
 export const FillInfos = () => {
     const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
 
     const connectedUser = connected[0]
-
     const [forceProfileImgUpdate, setForceProfileImgUpdate] = useState(0)
     const [forceCoverProfileImgUpdate, setForceCoverProfileImgUpdate] = useState(0)
 
+    const navigate = useNavigate()
 
     const handlProfileImgChange = (e) => {
-        console.log(`change`);
         const selectedImage = e.target.files[0];
         connectedUser.profileImage = selectedImage
         let connectedInDataBase = dataBase.find(element => element.userName == connectedUser.userName)
@@ -35,7 +39,7 @@ export const FillInfos = () => {
     const displayProfileImg = () => {
         return {
             style: {
-                backgroundImage: connectedUser.profileImage ? `url(${URL.createObjectURL(connectedUser.profileImage)})` : `url(${defaultProfileImage})`,
+                backgroundImage: connectedUser.profileImage != null ? `url(${URL.createObjectURL(connectedUser.profileImage)})` : `url(${defaultProfileImage})`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
@@ -56,7 +60,7 @@ export const FillInfos = () => {
     const displayCoverProfileImg = () => {
         return {
             style: {
-                backgroundImage: connectedUser.coverProfileImage ? `url(${URL.createObjectURL(connectedUser.coverProfileImage)})` : `url(${defaultCoverImage})`,
+                backgroundImage: connectedUser.coverProfileImage != null ? `url(${URL.createObjectURL(connectedUser.coverProfileImage)})` : `url(${defaultCoverImage})`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
@@ -72,6 +76,7 @@ export const FillInfos = () => {
 
     const [newDataBase, setNewDataBase] = useState(dataBase.filter(element => element.userName != connectedUser.userName))
 
+    console.log(newDataBase);
     const Search = (e) => {
         let newtab = newDataBase.filter(element => element.firstName.includes(e))
         setNewDataBase(newtab)
@@ -80,9 +85,13 @@ export const FillInfos = () => {
         }
     }
 
+
     return (
         <>
             <div className="w-[65%] flex flex-col gap-5">
+                <div className="flex justify-end">
+                    <HiMiniXMark className="text-[2.5rem]" onClick={() => { navigate(`/home`) }} />
+                </div>
                 <div className="w-[100%] h-[50vh] bg-gray-400 p-3 relative rounded-md ">
 
                     <label {...displayCoverProfileImg()}
@@ -117,7 +126,7 @@ export const FillInfos = () => {
                         <>
                             <Card className="w-[calc((100%_/_4)-1rem)] h-[50vh] flex flex-col justify-between">
                                 <div color="" className="h-[60%] rounded-lg"
-                                    style={{ backgroundImage: element.profileImage ? `url(${URL.createObjectURL(element.profileImage)})` : `url(${defaultProfileImage})`, backgroundPosition: `center`, backgroundSize: `cover`, backgroundRepeat: `no-repeat` }}
+                                    style={{ backgroundImage: element.profileImage ? `url(${element.profileImage})` : `url(${defaultProfileImage})`, backgroundPosition: `center`, backgroundSize: `cover`, backgroundRepeat: `no-repeat` }}
                                 >
                                 </div>
                                 <CardBody className="flex flex-col p-0 gap-2 items-center">

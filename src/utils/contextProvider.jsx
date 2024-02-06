@@ -30,6 +30,7 @@ export const MyProvider = ({ children }) => {
     ])
 
     const [allPostsDataBase, setAllPostsDataBase] = useState([])
+    console.log(allPostsDataBase);
 
     const [marketPlaceDataBase, setMarketPlaceDataBase] = useState([])
 
@@ -67,14 +68,14 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myPosts:[],
+        myPosts: [],
         myStories: {
             name: "1",
             file: user1pic,
             text: "Lorem, ipsum dolor sit amet consectetur saepe aperiam maiores neque doloremque officia dolorem necessitatibus perferendis quae?",
-            profileImage:user1pic,
+            profileImage: user1pic,
         },
-        profileImage: user1pic,
+        profileImage: null,
         coverProfileImage: null
     }
     let user2 = {
@@ -98,12 +99,12 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myPosts:[],
+        myPosts: [],
         myStories: {
             name: "2",
             file: user2pic,
             text: "kkkkkkk",
-            profileImage:user2pic,
+            profileImage: user2pic,
         },
         profileImage: user2pic,
         coverProfileImage: null
@@ -130,12 +131,12 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myPosts:[],
+        myPosts: [],
         myStories: {
             name: "3",
             file: user3pic,
             text: "kkkkkkk",
-            profileImage:user3pic,
+            profileImage: user3pic,
         },
         profileImage: user3pic,
         coverProfileImage: null
@@ -161,12 +162,12 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myPosts:[],
+        myPosts: [],
         myStories: {
             name: "4",
             file: user4pic,
             text: "kkkkkkk",
-            profileImage:user4pic,
+            profileImage: user4pic,
         },
         profileImage: user4pic,
         coverProfileImage: null
@@ -193,12 +194,12 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myPosts:[],
+        myPosts: [],
         myStories: {
             name: "5",
             file: user5pic,
             text: "kkkkkkk",
-            profileImage:user5pic,
+            profileImage: user5pic,
         },
         profileImage: user5pic,
         coverProfileImage: null
@@ -208,8 +209,8 @@ export const MyProvider = ({ children }) => {
         user1, user2, user3, user4, user5
     ])
 
-
     const [connected, setConnected] = useState([])
+    console.log(connected);
 
     return (
         <>

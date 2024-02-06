@@ -1,11 +1,13 @@
 import { useContext, useState } from "react"
 import { MyContext } from "../../../utils/contextProvider"
 import { HiMiniXMark } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 export const SignUpSection = ({ step, setStep }) => {
     const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
 
 
+    const navigate = useNavigate()
     const [firstName, setFirstName] = useState(``)
     const [lastName, setLastName] = useState(``)
     const [userName, setUserName] = useState(``)
@@ -150,6 +152,13 @@ export const SignUpSection = ({ step, setStep }) => {
                         followers: [],
                         following: [],
                         myGroups: [],
+                        myPosts: [],
+                        myStories: {
+                            name: "2",
+                            file: null,
+                            text: "kkkkkkk",
+                            profileImage: null,
+                        },
                         profileImage: null,
                         coverProfileImage: null
                     }

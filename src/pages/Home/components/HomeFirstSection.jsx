@@ -6,6 +6,8 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader, navbar } from '@materia
 import { IoMdImages } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import { MyContext } from '../../../utils/contextProvider';
+import defaultProfileImage from "../../../assets/img/profile.png"
+
 
 import user1pic from "../../../assets/img/aiony-haust-3TLl_97HNJo-unsplash.jpg"
 import user2pic from "../../../assets/img/christopher-campbell-rDEOVtE7vOs-unsplash.jpg"
@@ -92,7 +94,7 @@ export const FirstSection = () => {
     // Update userStory object when storyPic or storyName changes
     let userStory = {
         name: "",
-        profileImage:"",
+        profileImage: connected[0].profileImage ? connected[0].profileImage : defaultProfileImage,
         file: storyPic ? storyPic : "", // Use storyPic to generate URL if available
         text: storyText,
     }
@@ -110,7 +112,7 @@ export const FirstSection = () => {
     const addStory = () => {
         const newUserStory = {
             name: storyName,
-            file: storyPic ? URL.createObjectURL(storyPic) : "", // Convert storyPic to URL if available
+            file: storyPic ? URL.createObjectURL(storyPic) : defaultProfileImage, // Convert storyPic to URL if available
             text: storyText,
         };
     
