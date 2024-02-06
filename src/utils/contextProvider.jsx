@@ -1,6 +1,13 @@
 import { logDOM } from "@testing-library/react";
 import { createContext, useState } from "react";
 
+import user1pic from "../assets/img/aiony-haust-3TLl_97HNJo-unsplash.jpg"
+import user2pic from "../assets/img/christopher-campbell-rDEOVtE7vOs-unsplash.jpg"
+import user3pic from "../assets/img/jose-alejandro-cuffia-k1LNP6dnyAE-unsplash.jpg"
+import user4pic from "../assets/img/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
+import user5pic from "../assets/img/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.jpg"
+
+
 export const MyContext = createContext()
 
 export const MyProvider = ({ children }) => {
@@ -23,6 +30,7 @@ export const MyProvider = ({ children }) => {
     ])
 
     const [allPostsDataBase, setAllPostsDataBase] = useState([])
+    console.log(allPostsDataBase);
 
     const [marketPlaceDataBase, setMarketPlaceDataBase] = useState([])
 
@@ -60,7 +68,13 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myStories: [],
+        myPosts: [],
+        myStories: {
+            name: "1",
+            file: user1pic,
+            text: "Lorem, ipsum dolor sit amet consectetur saepe aperiam maiores neque doloremque officia dolorem necessitatibus perferendis quae?",
+            profileImage: user1pic,
+        },
         profileImage: null,
         coverProfileImage: null
     }
@@ -85,8 +99,14 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myStories: [],
-        profileImage: null,
+        myPosts: [],
+        myStories: {
+            name: "2",
+            file: user2pic,
+            text: "kkkkkkk",
+            profileImage: user2pic,
+        },
+        profileImage: user2pic,
         coverProfileImage: null
     }
 
@@ -111,8 +131,14 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myStories: [],
-        profileImage: null,
+        myPosts: [],
+        myStories: {
+            name: "3",
+            file: user3pic,
+            text: "kkkkkkk",
+            profileImage: user3pic,
+        },
+        profileImage: user3pic,
         coverProfileImage: null
     }
     let user4 = {
@@ -136,13 +162,19 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myStories: [],
-        profileImage: null,
+        myPosts: [],
+        myStories: {
+            name: "4",
+            file: user4pic,
+            text: "kkkkkkk",
+            profileImage: user4pic,
+        },
+        profileImage: user4pic,
         coverProfileImage: null
     }
 
     let user5 = {
-        firstName: `achraf`,
+        firstName: `chraf`,
         lastName: `aithaddou`,
         userName: `achraf12`,
         email: `achraf@gmail.com`,
@@ -162,17 +194,23 @@ export const MyProvider = ({ children }) => {
         following: [],
         myGroups: [],
         myProducts: [],
-        myStories: [],
-        profileImage: null,
+        myPosts: [],
+        myStories: {
+            name: "5",
+            file: user5pic,
+            text: "kkkkkkk",
+            profileImage: user5pic,
+        },
+        profileImage: user5pic,
         coverProfileImage: null
     }
 
     const [dataBase, setDataBase] = useState([
-        user1, user2, user3, user4, user5, user5
+        user1, user2, user3, user4, user5
     ])
 
-
     const [connected, setConnected] = useState([])
+    console.log(connected);
 
     return (
         <>

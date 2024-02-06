@@ -23,7 +23,7 @@ const Header = () => {
                 <div className='flex justify-around items-center w-[21vw]'>
                     <Link className='text-2xl p-3 rounded-full bg-blue-300  flex justify-center items-center' to={"/"}> <FaHouse /> </Link>
                     <Link className='text-2xl p-3 rounded-full bg-gray-300 flex justify-center items-center' to={"/"}> <RiChatHistoryFill /> </Link>
-                    <Link className='text-2xl p-3 rounded-full bg-gray-300 flex justify-center items-center' to={"/"}> <FaVideo /> </Link>
+                    <Link className='text-2xl p-3 rounded-full bg-gray-300 flex justify-center items-center' to={"/Video"}> <FaVideo /> </Link>
                     <Link className='text-2xl p-3 rounded-full bg-gray-300 flex justify-center items-center' to={"/"}> <MdGroups /> </Link>
                     <Link className='text-2xl p-3 rounded-full bg-gray-300 flex justify-center items-center' to={"/"}> <FaShop /> </Link>
                 </div>

@@ -29,9 +29,9 @@ export const LoginSection = ({ step, setStep }) => {
         if (userName && password) {
             let connectedUser = newTab.find((element => element.userName == userName && element.password == password))
             if (connectedUser) {
-                setConnected(connectedUser)
-                // navigate(`/profile/${newTab[connectedUser].userName}`)
+                setConnected([...connected , connectedUser])
                 alert(`user exist`)
+                navigate(`/home`)
             } else {
                 alert("unvalide input username or password wrong")
             }

@@ -1,6 +1,8 @@
 import { useContext, useState } from "react"
 import { MyContext } from "../../utils/contextProvider"
 import { Navigate, useNavigate } from "react-router-dom"
+import { HiMiniXMark } from "react-icons/hi2";
+
 
 export const ForgetPassword = () => {
     const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
@@ -57,6 +59,9 @@ export const ForgetPassword = () => {
         <>
             <div className="bg-[#d6d6d6] min-h-[100vh] flex justify-center items-center">
                 <form className="flex flex-col gap-4 w-[30%] bg-white p-3 rounded-md">
+                    <div className="flex justify-end">
+                        <HiMiniXMark className="text-[2.5rem]" onClick={() => { navigate(`/`) }} />
+                    </div>
                     <div className="flex flex-col">
                         <label>username</label>
                         <input type="text" placeholder="username" onChange={(e) => { setUserName(e.target.value) }} />

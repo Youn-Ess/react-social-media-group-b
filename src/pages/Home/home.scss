@@ -1,0 +1,50 @@
+.App {
+    text-align: center;
+    // margin-top: 50px;
+}
+
+.drop-area {
+    position: relative;
+    /* Required for absolute positioning */
+    border: 2px dashed #aaaaaa;
+    // padding: 20px;
+    cursor: pointer;
+}
+
+.file-input {
+    position: absolute;
+    /* Position file input over drop area */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    /* Hide file input */
+    cursor: pointer;
+}
+
+/* Style the label */
+.drop-area label {
+    cursor: pointer;
+}
+
+/* Optional: Style the drop area when files are being dragged over it */
+.drop-area:hover {
+    border-color: #93c2f5;
+    color: #93c2f5;
+    font-size: large;
+}
+
+.pic-delete{
+    opacity: 0;
+}
+.post-img:hover{
+    .pic-delete{
+        opacity: 1;
+        transition: 0.2s;
+        background: #00000050;
+        height: 120px;
+        width: 100px;
+        color: rgba(255, 255, 255, 0.888);
+    }
+}
