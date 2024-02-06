@@ -21,11 +21,11 @@ export const MyProvider = ({ children }) => {
             content: `movies`
         },
         {
-            admins: [`username12`, `username2`],
+            admins: [`username12`],
             name: `younessGroup`,
             description: `group description 1`,
             members: [`username10`, `username20`],
-            content: `trols`
+            content: `trolls`
         }
     ])
 
