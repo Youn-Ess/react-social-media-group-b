@@ -108,8 +108,8 @@ export const HomePage = () => {
     console.log(connected[0]);
     const createPost = () => {
         let post = {
-            user: "userName",
-            userPicture: "",
+            user: connected[0].userName,
+            userPicture: connected[0].profileImage,
             description: postDescription,
             image: postPictute,
             date: "3 hours ago",
@@ -219,9 +219,7 @@ export const HomePage = () => {
                             <div className=" bg-blue-gray-100 w-[40vw] h-fit min-h-[20vh] rounded">
                                 <div className="post-header flex gap-3 items-center justify-between bg-blue-gray-200 rounded-t p-2">
                                     <div className="flex gap-3 items-center">
-                                        <p className='border-2 border-black rounded-full w-10 h-10 flex items-center justify-center'>
-                                            img
-                                        </p>
+                                        <div className="border-2 border-black rounded-full w-10 h-10 flex items-center justify-center" style={{ backgroundImage: `url(${element.userPicture})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center"}}></div>
                                         <div className="">
                                             <h3 className=''>{element.user}</h3>
                                             <p className='opacity-50'>{element.date}</p>

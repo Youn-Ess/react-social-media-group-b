@@ -14,6 +14,7 @@ import user2pic from "../../../assets/img/christopher-campbell-rDEOVtE7vOs-unspl
 import user3pic from "../../../assets/img/jose-alejandro-cuffia-k1LNP6dnyAE-unsplash.jpg"
 import user4pic from "../../../assets/img/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
 import user5pic from "../../../assets/img/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.jpg"
+import { ProfilePage } from '../../Profile/Profile';
 
 export const FirstSection = () => {
 
@@ -35,11 +36,11 @@ export const FirstSection = () => {
     };
     console.log(dataBase);
 
-    useEffect(() => {
-        const tab = [];
-        dataBase.forEach(element => tab.push(element.myStories));
-        setStoriesDataBase(tab);
-    }, []);
+    // useEffect(() => {
+    //     const tab = [];
+    //     dataBase.forEach(element => tab.push(element.myStories));
+    //     setStoriesDataBase(tab);
+    // }, []);
 
     console.log(storiesDataBase);
 
@@ -93,8 +94,8 @@ export const FirstSection = () => {
 
     // Update userStory object when storyPic or storyName changes
     let userStory = {
-        name: "",
-        profileImage: connected[0].profileImage ? connected[0].profileImage : defaultProfileImage,
+        name: connected[0].userName,
+        profileImage: connected[0].profileImage,
         file: storyPic ? storyPic : "", // Use storyPic to generate URL if available
         text: storyText,
     }
@@ -114,6 +115,7 @@ export const FirstSection = () => {
             name: storyName,
             file: storyPic ? URL.createObjectURL(storyPic) : defaultProfileImage, // Convert storyPic to URL if available
             text: storyText,
+
         };
     
         const updatedStoriesDataBase = [newUserStory, ...storiesDataBase];
@@ -144,7 +146,7 @@ export const FirstSection = () => {
                                             <div className="flex h-full justify-center w-full rounded-[10px]" style={{ backgroundImage: `${userStory.file ? `url(URL.createObjectURL(${userStory.file}))` :`url(${story.file})`} `, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                         )
                                     }
-                                    <div key={index} className="absolute bottom-2 w-10 h-10 border rounded-full" style={{ backgroundImage:` ${userStory.profileImage ? `url(URL.createObjectURL(${userStory.profileImage}))` :`url(${story.profileImage})`} ` , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                                        <div key={index} className="absolute bottom-2 w-10 h-10 border rounded-full" style={{ backgroundImage: `${`url(${connected[0].profileImage})`}`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                 </div>
                                 <Dialog
                                     className=''
