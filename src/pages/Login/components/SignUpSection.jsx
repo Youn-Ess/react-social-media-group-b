@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { MyContext } from "../../../utils/contextProvider"
 import { HiMiniXMark } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import image from "../../../assets/img/Mobile login-rafiki.png"
 
 export const SignUpSection = ({ step, setStep }) => {
     const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
@@ -185,52 +186,50 @@ export const SignUpSection = ({ step, setStep }) => {
 
     return (
         <>
-            <div className="bg-white p-3 w-[30%] ">
+        <section className="flex items-center">
+            <img className="w-[50vw]" src={image} alt="" />
+            <div className="w-[40vw] ">
                 <div className="pb-3 flex justify-between">
-                    <div>
-                        <h1 className="text-[2.5rem]">Register</h1>
-                        <p>it's quick and easy.</p>
-                    </div>
+                        <h1 className="text-5xl w-[30vw] font-bold">Creat Your Account</h1>
                     <div>
                         <HiMiniXMark className="text-[2.5rem]" onClick={() => { setStep(0) }} />
                     </div>
                 </div>
-                <hr />
-                <form className="grid grid-cols-2 gap-4 pt-3" >
+                <form className="grid grid-cols-2 gap-2 pt-3" >
                     <div className="flex flex-col">
-                        <input type="text" placeholder="First name" onChange={(e) => { setFirstName(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="text" placeholder="First name" onChange={(e) => { setFirstName(e.target.value) }} />
                     </div>
                     <div className="flex flex-col">
-                        <input type="text" placeholder="last name" onChange={(e) => { setLastName(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="text" placeholder="last name" onChange={(e) => { setLastName(e.target.value) }} />
                     </div>
                     <div className="flex flex-col col-span-2">
-                        <input type="text" placeholder="userName" onChange={(e) => { setUserName(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="text" placeholder="userName" onChange={(e) => { setUserName(e.target.value) }} />
                     </div>
                     <div className="flex flex-col col-span-2">
-                        <input type="email" placeholder="email" onChange={(e) => { setEmail(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="email" placeholder="email" onChange={(e) => { setEmail(e.target.value) }} />
                     </div>
                     <div className="flex flex-col col-span-2">
-                        <input type="text" placeholder="phone number" onChange={(e) => { setPhoneNumber(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="text" placeholder="phone number" onChange={(e) => { setPhoneNumber(e.target.value) }} />
                     </div>
                     <div className="flex flex-col col-span-2">
-                        <input type="password" placeholder="password" onChange={(e) => { setPassword(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="password" placeholder="password" onChange={(e) => { setPassword(e.target.value) }} />
                     </div>
                     <div className="flex flex-col col-span-2">
-                        <input type="password" placeholder="confirme password" onChange={(e) => { setConfirmPassword(e.target.value) }} />
+                        <input className="rounded-md h-[8vh]" type="password" placeholder="confirme password" onChange={(e) => { setConfirmPassword(e.target.value) }} />
                     </div>
 
                     <div className="col-span-2">
                         <label htmlFor="">Date of birth</label>
                         <div className="flex justify-between">
-                            <input className="w-[32%]" type="text" placeholder="day" onChange={(e) => { setDay(e.target.value) }} />
-                            <input className="w-[32%]" type="text" placeholder="month" onChange={(e) => { setMonth(e.target.value) }} />
-                            <input className="w-[32%]" type="text" placeholder="year" onChange={(e) => { setYear(e.target.value) }} />
+                            <input className="rounded-md h-[8vh] w-[32%]" type="text" placeholder="day" onChange={(e) => { setDay(e.target.value) }} />
+                            <input className="rounded-md h-[8vh] w-[32%]" type="text" placeholder="month" onChange={(e) => { setMonth(e.target.value) }} />
+                            <input className="rounded-md h-[8vh] w-[32%]" type="text" placeholder="year" onChange={(e) => { setYear(e.target.value) }} />
                         </div>
                     </div>
 
                     <div className="col-span-2 flex flex-col">
-                        <label htmlFor="">Gender</label>
-                        <select onChange={(e) => { setGender(e.target.value) }}>
+                        <label  htmlFor="">Gender</label>
+                        <select className="rounded-md h-[8vh]" onChange={(e) => { setGender(e.target.value) }}>
                             <option value=""></option>
                             <option value="Man">Man</option>
                             <option value="Women">Women</option>
@@ -238,10 +237,11 @@ export const SignUpSection = ({ step, setStep }) => {
                     </div>
 
                     <div className="col-span-2 flex justify-center">
-                        <button className="bg-green-600 p-3 rounded-md w-[50%]" onClick={(e) => { nextPage(e) }}>Register</button>
+                        <button className="bg-blue-600 p-3 rounded-md w-[40vw] h-[8vh] font-bold" onClick={(e) => { nextPage(e) }}>Register</button>
                     </div>
                 </form>
             </div>
+        </section>
         </>
     )
 }
