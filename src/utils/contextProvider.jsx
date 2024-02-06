@@ -75,7 +75,7 @@ export const MyProvider = ({ children }) => {
             text: "Lorem, ipsum dolor sit amet consectetur saepe aperiam maiores neque doloremque officia dolorem necessitatibus perferendis quae?",
             profileImage: user1pic,
         },
-        profileImage: null,
+        profileImage: user1pic,
         coverProfileImage: null
     }
     let user2 = {
