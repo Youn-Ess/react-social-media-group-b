@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHouse, FaVideo, FaShop } from "react-icons/fa6";
 import { MdGroups, MdBookmarkAdded, MdEmojiEvents } from "react-icons/md";
@@ -6,6 +6,7 @@ import { RiMessage3Fill, RiLiveFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { IoMdSettings } from "react-icons/io";
 import { IoLogOutSharp } from "react-icons/io5";
+import { MyContext } from '../utils/contextProvider';
 
 
 
@@ -13,7 +14,12 @@ import { IoLogOutSharp } from "react-icons/io5";
 
 export const SideBare1 = () => {
     const navigat = useNavigate()
-    const focus = () =>{
+    const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
+    const logOut = () => {
+        setConnected([])
+        navigat(`/`)
+    }
+    const focus = () => {
 
     }
     return (
@@ -78,7 +84,7 @@ export const SideBare1 = () => {
                             <Link className='font-bold icon  p-3 text-2xl rounded-full mr-2 text-white' to={"/Settings"}><IoMdSettings /></Link>
                             <Link to={"/Settings"} className='font-bold text-white'>Settings</Link>
                         </div>
-                        <div className='flex items-center rounded-md hover:bg-[#8e9fbb] transition-all bg-[#475069]' onClick={() => navigat("/")}>
+                        <div className='flex items-center rounded-md hover:bg-[#8e9fbb] transition-all bg-[#475069]' onClick={logOut}>
                             <Link className='font-bold icon  p-3 text-2xl rounded-full mr-2 text-white' to={"/"}><IoLogOutSharp /></Link>
                             <Link to={"/"} className='font-bold text-white'>Log Out</Link>
                         </div>

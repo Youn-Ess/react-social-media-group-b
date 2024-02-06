@@ -30,7 +30,6 @@ export const MyProvider = ({ children }) => {
     ])
 
     const [allPostsDataBase, setAllPostsDataBase] = useState([])
-    console.log(allPostsDataBase);
 
     const [marketPlaceDataBase, setMarketPlaceDataBase] = useState([])
 
@@ -211,6 +210,7 @@ export const MyProvider = ({ children }) => {
 
     const [connected, setConnected] = useState([])
     console.log(connected);
+    console.log(dataBase);
 
     return (
         <>
