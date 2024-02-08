@@ -19,8 +19,6 @@ import { MessagesPage } from './pages/messages/messagesPgae';
 function App() {
   return (
     <MyProvider>
-
-
       <Routes >
         <Route path='/' element={<LoginPage />} />
         <Route path='/forgetpassword' element={<ForgetPassword />} />
