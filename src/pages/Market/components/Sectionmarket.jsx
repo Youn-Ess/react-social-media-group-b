@@ -41,14 +41,14 @@ export const Sectionmarket = () => {
     // const filterMakeup = myAllProducts.filter((myAllProducts) => myAllProducts.categorie == "Makeup")
 
 
-    const filterProducts = (e) => {
-        if (e) {
-            let newTab = newDataBase.filter((element) => element.categorie.includes(e))
-            setNewDataBase(newTab)
-        } else {
-            setNewDataBase(marketPlaceDataBase)
-        }
-    }
+    // const filterProducts = (e) => {
+    //     if (e) {
+    //         let newTab = newDataBase.filter((element) => element.categorie.includes(e))
+    //         setNewDataBase(newTab)
+    //     } else {
+    //         setNewDataBase(marketPlaceDataBase)
+    //     }
+    // }
 
     const [productTitle, setProductTitle] = useState(``)
     const [productPrice, setProductPrice] = useState(``)
@@ -57,10 +57,11 @@ export const Sectionmarket = () => {
     const [productImage, setProductImage] = useState(null)
 
 
-    const [newDataBase, setNewDataBase] = useState([])
+    const [newDataBase, setNewDataBase] = useState([...marketPlaceDataBase])
     let connectedUser = connected[0].userName
     const addProduct = () => {
         if (productTitle && productPrice && productDescription && productCategorie && productImage) {
+            console.log(productCategorie);
             let newProduct = {
                 username: connectedUser,
                 title: productTitle,
@@ -69,24 +70,38 @@ export const Sectionmarket = () => {
                 description: productDescription,
                 categorie: productCategorie
             }
-            setMarketPlaceDataBase([...marketPlaceDataBase, newProduct])
             let newTab = [...marketPlaceDataBase]
             newTab.push(newProduct)
-            setNewDataBase(newTab)
+            setMarketPlaceDataBase(newTab)
             handleOpen()
         } else {
             alert(`must fill all inputs`)
         }
     }
 
-    console.log(newDataBase);
+    const [selectedCategorie, setSelectedCategorie] = useState(``)
+
+
+    const [test, setTest] = useState([])
+
+
+    const handlCategorie = (e) => {
+        setTest([...marketPlaceDataBase])
+        if (e.target.value) {
+            let newTab = marketPlaceDataBase.filter(element => element.categorie.includes(e.target.value))
+            console.log(newTab);
+            // setMarketPlaceDataBase(newTab)
+            setNewDataBase(newTab)
+        }else{
+            setNewDataBase([...marketPlaceDataBase])
+        }
+    }
 
 
     const handlImageProduct = (e) => {
         const selectedImage = URL.createObjectURL(e.target.files[0])
         setProductImage(selectedImage)
     }
-    console.log(marketPlaceDataBase);
 
     return (
         <>
@@ -103,7 +118,13 @@ export const Sectionmarket = () => {
                             <label htmlFor="">product description</label>
                             <input type="text" onChange={(e) => { setProductDescription(e.target.value) }} />
                             <label htmlFor="">product categorie</label>
-                            <input type="text" onChange={(e) => { setProductCategorie(e.target.value) }} />
+                            <select name="select" onChange={(e) => { setProductCategorie(e.target.value) }}>
+                                <option value="" selected></option>
+                                <option value="makeup">makeup</option>
+                                <option value="vetement" selected>vetement</option>
+                                <option value="cars">cars</option>
+                                <option value="accessoire">accessoire</option>
+                            </select>
                             <label htmlFor="">product image</label>
                             <input type="file" onChange={handlImageProduct} />
                         </form>
@@ -149,10 +170,17 @@ export const Sectionmarket = () => {
                     {/* section 2 */}
                     <section>
                         <div className='flex w-[100%] items-center justify-evenly'>
-                            <input type="search" onChange={(e) => { filterProducts(e.target.value) }} />
+                            <select name="select" onChange={(e) => { handlCategorie(e) }}>
+                                <option value="" selected></option>
+                                <option value="makeup">makeup</option>
+                                <option value="vetement">vetement</option>
+                                <option value="cars">cars</option>
+                                <option value="accessoire">accessoire</option>
+                            </select>
                             <Button onClick={handleOpen} variant="gradient">
                                 post product
-                            </Button>                        </div>
+                            </Button>
+                        </div>
                         <div className=" p-5  flex  flex-wrap justify-evenly">    {
                             newDataBase.map((element, index) =>
                                 <div className="grid ">
