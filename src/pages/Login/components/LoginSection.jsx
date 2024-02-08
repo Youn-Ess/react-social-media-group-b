@@ -1,6 +1,11 @@
 import { useContext, useState } from "react"
 import { MyContext } from "../../../utils/contextProvider"
 import { useNavigate } from "react-router-dom"
+import { HiOutlineMail } from "react-icons/hi";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { Checkbox } from "flowbite-react";
+import image from "../../../assets/img/Tablet login-amico.png"
+
 
 export const LoginSection = ({ step, setStep }) => {
     const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
@@ -29,7 +34,7 @@ export const LoginSection = ({ step, setStep }) => {
         if (userName && password) {
             let connectedUser = newTab.find((element => element.userName == userName && element.password == password))
             if (connectedUser) {
-                setConnected([...connected , connectedUser])
+                setConnected([...connected, connectedUser])
                 alert(`user exist`)
                 navigate(`/home`)
             } else {
@@ -42,29 +47,33 @@ export const LoginSection = ({ step, setStep }) => {
 
     return (
         <>
-            <div className="w-[70%]  flex justify-between items-center">
-                <div className="">
-                    <h1 className="text-[3.5rem]">Project</h1>
-                    <p className="text-[1.5rem]">description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatem.</p>
-                </div>
-
-                <form className="flex flex-col gap-4 w-[60%] bg-white p-3 rounded-md">
-                    <div className="flex flex-col">
-                        <label>username</label>
-                        <input type="text" placeholder="username" onChange={(e) => { setUserName(e.target.value) }} />
+        <section className="flex items-center">
+            <div>
+                <img className="w-[45vw]" src={image} alt="" />
+            </div>
+            <div className="w-[70%]  flex flex-col justify-between items-center">
+                <h1 className="text-[3.5rem] font-bold w-[38vw] text-start">Login Into Your Account</h1>
+                <form className="flex flex-col gap-4 w-[40vw] p-3 rounded-md">
+                    <div className="flex flex-col relative">
+                        <input className="pl-12 w-[35vw] font-bold h-[10vh] rounded-md" type="text" placeholder="Username" onChange={(e) => { setUserName(e.target.value) }} />
+                        <HiOutlineMail className="absolute text-4xl top-3 left-2" />
                     </div>
-                    <div className="flex flex-col">
-                        <label>password</label>
-                        <input type="password" placeholder="password" onChange={(e) => { setPassword(e.target.value) }} />
+                    <div className="flex flex-col relative">
+                        <input className="pl-12 w-[35vw] font-bold h-[10vh] rounded-md" type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
+                        <RiLockPasswordLine className="absolute text-4xl top-3 left-2" />
                     </div>
-                    <button className="bg-light-blue-400 p-3 rounded-md" onClick={(e) => { login(e) }}>Log in</button>
-                    <p className="text-center text-[0.9rem] text-light-blue-900 hover:underline  underline-offset-2" onClick={() => { navigate(`/forgetpassword`) }}>Forgot your password ?</p>
-                    <hr />
-                    <div className="flex justify-center">
-                        <button className="bg-green-600 p-3 rounded-md w-[60%]" onClick={(e) => { nextPage(e) }}>Create new account</button>
+                    <div className="flex items-center justify-between w-[35vw]">
+                        <div className="flex items-center">
+                            <Checkbox className="w-6 h-6 mr-3 cursor-pointer"/>
+                            <h1 className="font-bold">Remember Me</h1>
+                        </div>
+                        <p className="text-center text-[0.9rem]  hover:underline  underline-offset-2 font-bold cursor-pointer" onClick={() => { navigate(`/forgetpassword`) }}>Forgot your password ?</p>
                     </div>
+                    <button className="bg-light-blue-400 p-3 rounded-md w-[35vw] h-[10vh] font-bold" onClick={(e) => { login(e) }}>Log in</button>
+                        <button className="text-start font-bold" onClick={(e) => { nextPage(e) }}>Don't have account! <span className="text-blue-600 border-b-2 border-blue-600">Register</span></button>
                 </form>
             </div>
+        </section>
         </>
     )
 }

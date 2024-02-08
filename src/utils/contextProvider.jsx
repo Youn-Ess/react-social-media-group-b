@@ -21,16 +21,15 @@ export const MyProvider = ({ children }) => {
             content: `movies`
         },
         {
-            admins: [`username12`, `username2`],
+            admins: [`username12`],
             name: `younessGroup`,
             description: `group description 1`,
             members: [`username10`, `username20`],
-            content: `trols`
+            content: `trolls`
         }
     ])
 
     const [allPostsDataBase, setAllPostsDataBase] = useState([])
-    console.log(allPostsDataBase);
 
     const [marketPlaceDataBase, setMarketPlaceDataBase] = useState([])
 
@@ -75,7 +74,7 @@ export const MyProvider = ({ children }) => {
             text: "Lorem, ipsum dolor sit amet consectetur saepe aperiam maiores neque doloremque officia dolorem necessitatibus perferendis quae?",
             profileImage: user1pic,
         },
-        profileImage: null,
+        profileImage: user1pic,
         coverProfileImage: null
     }
     let user2 = {
@@ -211,6 +210,7 @@ export const MyProvider = ({ children }) => {
 
     const [connected, setConnected] = useState([])
     console.log(connected);
+    console.log(dataBase);
 
     return (
         <>
