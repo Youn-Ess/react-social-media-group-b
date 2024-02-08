@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHouse, FaVideo, FaShop, FaMessage } from "react-icons/fa6";
 import { MdGroups, MdDarkMode, MdEmojiEvents } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import { MyContext } from '../utils/contextProvider';
+import defaultProfileImage from "../assets/img/profile.png"
 
 
 
@@ -14,8 +16,12 @@ import { CgProfile } from "react-icons/cg";
 
 
 const Header = () => {
+    const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)
+
+
+
     return (
-        <div className='flex justify-between items-center p-2 bg-white shadow-[rgba(0,0,10,0.2)_5px_5px_4px_0px] fixed w-full z-10'>
+        <div className='flex justify-between items-center p-2 bg-white shadow-[rgba(0,0,10,0.2)_5px_5px_4px_0px] fixed w-full z-20'>
             <Link className='font-bold text-2xl ml-[6vw]' to={"/"}> <span className='text-[#8e9fbb] text-4xl'>S</span>o<span className='text-[#8e9fbb] font-bold'>C</span>ial<span className='text-[#8e9fbb] font-bold text-4xl'>S</span></Link>
             <nav className='flex justify-between items-center w-[48vw] ml-[14vw]'>
                 <div className='flex justify-around items-center w-[21vw]'>
@@ -31,7 +37,7 @@ const Header = () => {
                 <Link className='text-2xl p-3 rounded-full hover:bg-[#475069] hover:text-white transition-all bg-[#8e9fbb] flex justify-center items-center' to={"/"}> <IoMdNotifications /> </Link>
                 <Link className='text-2xl p-3 rounded-full hover:bg-[#475069] hover:text-white transition-all bg-[#8e9fbb] flex justify-center items-center' to={"/"}> <FaMessage /></Link>
                 <Link className='text-2xl p-3 rounded-full hover:bg-[#475069] hover:text-white transition-all bg-[#8e9fbb] flex justify-center items-center' to={"/"} ><MdDarkMode /></Link>
-                <Link className='text-2xl p-3 rounded-full hover:bg-[#475069] hover:text-white transition-all bg-[#8e9fbb] flex justify-center items-center' to={"/profile"}> <CgProfile /></Link>
+                <Link className='text-2xl p-3 rounded-full hover:bg-[#475069] hover:text-white transition-all bg-[#8e9fbb] flex justify-center items-center' to={"/profile"} style={{ backgroundImage: `url(${connected[0].profileImage ? URL.createObjectURL(connected[0].profileImage) : defaultProfileImage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}> </Link>
             </div>
         </div>
     );

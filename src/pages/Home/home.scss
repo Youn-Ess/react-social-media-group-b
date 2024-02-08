@@ -35,11 +35,12 @@
     font-size: large;
 }
 
-.pic-delete{
+.pic-delete {
     opacity: 0;
 }
-.post-img:hover{
-    .pic-delete{
+
+.post-img:hover {
+    .pic-delete {
         opacity: 1;
         transition: 0.2s;
         background: #00000050;
@@ -48,3 +49,23 @@
         color: rgba(255, 255, 255, 0.888);
     }
 }
+
+
+
+
+
+
+
+.content {
+    // padding: 13px 16px;
+    display: flex;
+    border: 2px solid #eae2e1;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content.heart-active {
+    border-color: #f9b9c4;
+    background: #fbd0d8;
+}
+

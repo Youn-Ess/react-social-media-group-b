@@ -126,7 +126,7 @@ export const FillInfos = () => {
                         <>
                             <Card className="w-[calc((100%_/_4)-1rem)] h-[50vh] flex flex-col justify-between">
                                 <div color="" className="h-[60%] rounded-lg"
-                                    style={{ backgroundImage: element.profileImage ? `url(${element.profileImage})` : `url(${defaultProfileImage})`, backgroundPosition: `center`, backgroundSize: `cover`, backgroundRepeat: `no-repeat` }}
+                                    style={{ backgroundImage: element.profileImage ? `url(${URL.createObjectURL(element.profileImage)})` : `url(${defaultProfileImage})`, backgroundPosition: `center`, backgroundSize: `cover`, backgroundRepeat: `no-repeat` }}
                                 >
                                 </div>
                                 <CardBody className="flex flex-col p-0 gap-2 items-center">
