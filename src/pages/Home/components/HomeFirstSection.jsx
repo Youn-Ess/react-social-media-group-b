@@ -6,7 +6,6 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader, navbar } from '@materia
 import { IoMdImages } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import { MyContext } from '../../../utils/contextProvider';
-import defaultProfileImage from "../../../assets/img/profile.png"
 
 
 import user1pic from "../../../assets/img/aiony-haust-3TLl_97HNJo-unsplash.jpg"
@@ -15,6 +14,8 @@ import user3pic from "../../../assets/img/jose-alejandro-cuffia-k1LNP6dnyAE-unsp
 import user4pic from "../../../assets/img/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
 import user5pic from "../../../assets/img/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.jpg"
 import { ProfilePage } from '../../Profile/Profile';
+import defaultProfileImage from "../../../assets/img/profile.png"
+
 
 export const FirstSection = () => {
 
@@ -117,18 +118,18 @@ export const FirstSection = () => {
             text: storyText,
 
         };
-    
+
         const updatedStoriesDataBase = [newUserStory, ...storiesDataBase];
-    
+
         setStoriesDataBase(updatedStoriesDataBase);
-    
+
         handleOpen();
         setStoryPic(null);
         setStoryText("");
         setStoryName("");
     };
 
-    console.log(dataBase[0].profileImage);
+    console.log(connected[0].profileImage);
 
     return (
         <>
@@ -143,23 +144,22 @@ export const FirstSection = () => {
                                 <div onClick={() => handleOpen2(index)} className="relative stories cursor-pointer h-44 flex flex-col items-center justify-center bg-red-700 min-w-[16%]">
                                     {
                                         story.file && (
-                                            <div className="flex h-full justify-center w-full rounded-[10px]" style={{ backgroundImage: `${userStory.file ? `url(URL.createObjectURL(${userStory.file}))` :`url(${story.file})`} `, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                                            <div className="flex h-full justify-center w-full rounded-[10px]" style={{ backgroundImage: `${userStory.file ? `url(URL.createObjectURL(${userStory.file}))` : `url(${story.file})`} `, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                         )
                                     }
-                                        <div key={index} className="absolute bottom-2 w-10 h-10 border rounded-full" style={{ backgroundImage: `${`url(${connected[0].profileImage})`}`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                                    <div key={index} className="absolute bottom-2 w-10 h-10 border rounded-full" style={{ backgroundImage: `url(${connected[0].profileImage ? URL.createObjectURL(connected[0].profileImage) : defaultProfileImage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                 </div>
                                 <Dialog
                                     className=''
                                     open={size2 === index}
                                     size={size2 || "s"}
                                     handler={() => handleOpen2(null)}
-
                                 >
                                     <DialogBody className='flex justify-center items-center'>
                                         <div className="h-fit w-full ">
                                             {
                                                 story.file ? (
-                                                    <div className="flex h-[50vh] justify-center w-full rounded-[10px] " style={{ backgroundImage: `${userStory.file ? `url(URL.createObjectURL(${userStory.file}))` :`url(${story.file})`} `, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>{story.name}</div>
+                                                    <div className="flex h-[50vh] justify-center w-full rounded-[10px] " style={{ backgroundImage: `${userStory.file ? `url(URL.createObjectURL(${userStory.file}))` : `url(${story.file})`} `, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>{story.name}</div>
                                                 )
                                                     : story.text ?
                                                         (

@@ -205,7 +205,7 @@ export const MyProvider = ({ children }) => {
     }
 
     const [dataBase, setDataBase] = useState([
-        user1, user2, user3, user4, user5
+        
     ])
 
     const [connected, setConnected] = useState([])
@@ -214,7 +214,7 @@ export const MyProvider = ({ children }) => {
 
     return (
         <>
-            <MyContext.Provider value={[dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase]}>
+            <MyContext.Provider value={[dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase,]}>
                 {children}
             </MyContext.Provider>
         </>

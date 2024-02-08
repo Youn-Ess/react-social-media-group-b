@@ -23,7 +23,7 @@ export const SideBare1 = () => {
 
     }
     return (
-        <div className='absolute left-0 mt-[4vw]'>
+        <div className='absolute left-0 mt-[4vw] z-10'>
             <div className='fixed overflow-y-scroll max-h-[100%] scrollbar-thin scrollbar-thumb-[#FF395C] scrollbar-track-[#ECEFF1]'>
                 <div className='flex flex-col shadow-md w-[22vw] rounded-md py-3 m-5 bg-white'>
                     <div className=' border-b-2 border-[#c3cee1]'>
