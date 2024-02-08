@@ -1,7 +1,13 @@
+import Header from "../../layouts/Header"
+import { SideBare1 } from "../../layouts/sideBare1"
+import Sectionmarket from "./components/Sectionmarket"
+
 export const MarketPage = () => {
     return (
         <>
-            <h1>market page</h1>
+            <Header />
+            <SideBare1 />
+            <Sectionmarket />
         </>
     )
 }
