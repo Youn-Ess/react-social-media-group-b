@@ -22,8 +22,6 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { Modal } from 'flowbite-react';
 import { MdAddComment } from 'react-icons/md';
 
-
-
 export const HomePage = () => {
 
     const [dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase] = useContext(MyContext)

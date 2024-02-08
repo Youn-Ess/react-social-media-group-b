@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Carousel } from "@material-tailwind/react";
 import boutique from "../../../assets/img/boutique.png";
@@ -57,19 +57,20 @@ export const Sectionmarket = () => {
     const [productImage, setProductImage] = useState(null)
 
 
-    const [newDataBase, setNewDataBase] = useState([...marketPlaceDataBase])
     let connectedUser = connected[0].userName
     const addProduct = () => {
         if (productTitle && productPrice && productDescription && productCategorie && productImage) {
-            console.log(productCategorie);
+            let id = 0
             let newProduct = {
                 username: connectedUser,
+                id: id,
                 title: productTitle,
                 price: productPrice,
                 image: productImage,
                 description: productDescription,
                 categorie: productCategorie
             }
+            id++
             let newTab = [...marketPlaceDataBase]
             newTab.push(newProduct)
             setMarketPlaceDataBase(newTab)
@@ -80,23 +81,22 @@ export const Sectionmarket = () => {
     }
 
     const [selectedCategorie, setSelectedCategorie] = useState(``)
+    const [newDataBase, setNewDataBase] = useState([])
 
-
-    const [test, setTest] = useState([])
-
+    useEffect(() => {
+        setNewDataBase([...marketPlaceDataBase]);
+    }, [marketPlaceDataBase]);
 
     const handlCategorie = (e) => {
-        setTest([...marketPlaceDataBase])
-        if (e.target.value) {
-            let newTab = marketPlaceDataBase.filter(element => element.categorie.includes(e.target.value))
-            console.log(newTab);
-            // setMarketPlaceDataBase(newTab)
-            setNewDataBase(newTab)
-        }else{
-            setNewDataBase([...marketPlaceDataBase])
+        const selectedCategory = e.target.value;
+
+        if (selectedCategory) {
+            const filteredData = marketPlaceDataBase.filter(element => element.categorie.includes(selectedCategory));
+            setNewDataBase(filteredData);
+        } else {
+            setNewDataBase([...marketPlaceDataBase]);
         }
     }
-
 
     const handlImageProduct = (e) => {
         const selectedImage = URL.createObjectURL(e.target.files[0])
