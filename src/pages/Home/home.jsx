@@ -37,7 +37,6 @@ export const HomePage = () => {
     const handleOpen = () => {
         setOpen(!open);
         setDeletePictureSection(true)
-
     };
 
     const handleOpen2 = () => {

@@ -36,6 +36,7 @@ function App() {
 
 
         <Route path='/profile' element={<ProfilePage />} />
+        
         <Route path='/groups' element={<GroupsPage />} />
         <Route path='/market' element={<MarketPage />} />
         <Route path='/settings' element={<SettingPage />} />
