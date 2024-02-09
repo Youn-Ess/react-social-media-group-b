@@ -26,17 +26,17 @@ function App() {
         <Route path='/home' element={<HomePage />} />
 
         <Route path='/Video' element={<VideoPage />} />
-        <Route path='/Live' element={<LivePage/>} />
-        <Route path='/Events' element={<EventPage/>} />
-        <Route path='/Messages' element={<MessagesPage/>} />
-        <Route path='/Saved' element={<SavedPage/>} />
+        <Route path='/Live' element={<LivePage />} />
+        <Route path='/Events' element={<EventPage />} />
+        <Route path='/Messages' element={<MessagesPage />} />
+        <Route path='/Saved' element={<SavedPage />} />
 
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/groups' element={<GroupsPage />} />
         <Route path='/market' element={<MarketPage />} />
         <Route path='/market/:id' element={<ShowProducts />} />
 
-        <Route path='/profile/setting' element={<SettingPage/>} />
+        <Route path='/settings' element={<SettingPage />} />
         <Route path='*' element={<ErrorsPage />} />
       </Routes >
     </MyProvider>
