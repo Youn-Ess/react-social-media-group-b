@@ -28,11 +28,16 @@ export const FillInfos = () => {
 
     const navigate = useNavigate()
 
+
+    
+    const [isSelectedProfile, setIsSelectedProfile] = useState(false)
+
     const handlProfileImgChange = (e) => {
-        const selectedImage = e.target.files[0];
-        connectedUser.profileImage = selectedImage
+        const profileSelected = e.target.files[0]
+        connectedUser.profileImage = profileSelected
         let connectedInDataBase = dataBase.find(element => element.userName == connectedUser.userName)
-        connectedInDataBase.profileImage = selectedImage
+        connectedInDataBase.profileImage = profileSelected
+        setIsSelectedProfile(true)
         setForceProfileImgUpdate(prev => prev + 1);
     };
 
@@ -47,13 +52,14 @@ export const FillInfos = () => {
         };
     };
 
-
+    const [isSelectedCoverProfile, setIsSelectedCoverProfile] = useState(false)
 
     const handlCoverProfileImgChange = (e) => {
-        const selectedImage = e.target.files[0];
-        connectedUser.coverProfileImage = selectedImage
+        const coverProfileSelected = e.target.files[0]
+        connectedUser.coverProfileImage = coverProfileSelected
         let connectedInDataBase = dataBase.find(element => element.userName == connectedUser.userName)
-        connectedInDataBase.coverProfileImage = selectedImage
+        connectedInDataBase.coverProfileImage = coverProfileSelected
+        setIsSelectedCoverProfile(true)
         setForceCoverProfileImgUpdate(prev => prev + 1);
     };
 
@@ -74,6 +80,12 @@ export const FillInfos = () => {
         e.target.parentElement.parentElement.remove()
     }
 
+    const goToHome = () => {
+        if (isSelectedCoverProfile == false && isSelectedProfile == false) {
+            return alert(`Please select a profile image and cover image`)
+        }
+        navigate(`/home`)
+    }
     const [newDataBase, setNewDataBase] = useState(dataBase.filter(element => element.userName != connectedUser.userName))
 
     console.log(newDataBase);
@@ -90,7 +102,7 @@ export const FillInfos = () => {
         <>
             <div className="w-[65%] flex flex-col gap-5">
                 <div className="flex justify-end">
-                    <HiMiniXMark className="text-[2.5rem]" onClick={() => { navigate(`/home`) }} />
+                    <HiMiniXMark className="text-[2.5rem]" onClick={goToHome} />
                 </div>
                 <div className="w-[100%] h-[50vh] bg-gray-400 p-3 relative rounded-md ">
 
@@ -126,7 +138,7 @@ export const FillInfos = () => {
                         <>
                             <Card className="w-[calc((100%_/_4)-1rem)] h-[50vh] flex flex-col justify-between">
                                 <div color="" className="h-[60%] rounded-lg"
-                                    style={{ backgroundImage: element.profileImage ? `url(${URL.createObjectURL(element.profileImage)})` : `url(${defaultProfileImage})`, backgroundPosition: `center`, backgroundSize: `cover`, backgroundRepeat: `no-repeat` }}
+                                    style={{ backgroundImage: `url(${URL.createObjectURL(element.profileImage)})`, backgroundPosition: `center`, backgroundSize: `cover`, backgroundRepeat: `no-repeat` }}
                                 >
                                 </div>
                                 <CardBody className="flex flex-col p-0 gap-2 items-center">

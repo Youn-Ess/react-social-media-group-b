@@ -6,6 +6,7 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader, navbar } from '@materia
 import { IoMdImages } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import { MyContext } from '../../../utils/contextProvider';
+import defaultProfileImage from "../../../assets/img/profile.png"
 
 
 import user1pic from "../../../assets/img/aiony-haust-3TLl_97HNJo-unsplash.jpg"
@@ -14,8 +15,6 @@ import user3pic from "../../../assets/img/jose-alejandro-cuffia-k1LNP6dnyAE-unsp
 import user4pic from "../../../assets/img/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
 import user5pic from "../../../assets/img/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.jpg"
 import { ProfilePage } from '../../Profile/Profile';
-import defaultProfileImage from "../../../assets/img/profile.png"
-
 
 export const FirstSection = () => {
 
@@ -116,7 +115,7 @@ export const FirstSection = () => {
             name: storyName,
             file: storyPic ? URL.createObjectURL(storyPic) : defaultProfileImage, // Convert storyPic to URL if available
             text: storyText,
-
+            profileImage: connected[0].profileImage,
         };
 
         const updatedStoriesDataBase = [newUserStory, ...storiesDataBase];
@@ -127,6 +126,7 @@ export const FirstSection = () => {
         setStoryPic(null);
         setStoryText("");
         setStoryName("");
+        
     };
 
     console.log(connected[0].profileImage);
@@ -147,7 +147,7 @@ export const FirstSection = () => {
                                             <div className="flex h-full justify-center w-full rounded-[10px]" style={{ backgroundImage: `${userStory.file ? `url(URL.createObjectURL(${userStory.file}))` : `url(${story.file})`} `, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                         )
                                     }
-                                    <div key={index} className="absolute bottom-2 w-10 h-10 border rounded-full" style={{ backgroundImage: `url(${connected[0].profileImage ? URL.createObjectURL(connected[0].profileImage) : defaultProfileImage})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                                    <div key={index} className="absolute bottom-2 w-10 h-10 border rounded-full" style={{ backgroundImage: `url(${URL.createObjectURL(story.profileImage)})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                 </div>
                                 <Dialog
                                     className=''

@@ -8,6 +8,26 @@ import user4pic from "../assets/img/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg"
 import user5pic from "../assets/img/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.jpg"
 
 
+import Peugeot208 from "../assets/img/images/208.jpg";
+import Peugeot308 from "../assets/img/images/308_Berline_5_Portes.jpg";
+import Peugeot508 from "../assets/img/images/508BREAK_5_PORTES.jpg";
+import Peugeot508B from "../assets/img/images/508_BERLINE_5_PORTES.jpg";
+import Peugeot408 from "../assets/img/images/Nouvelle_408.jpg";
+import Peugeot308SW from "../assets/img/308SW_5PORTES.jpg";
+import oreille from "../assets/img/images/Clips_D'oreille.webp";
+import bracelets from "../assets/img/images/bracelets.webp";
+import BijouxVintage from "../assets/img/images/Bijoux_Vintage.jpg";
+import Montre from "../assets/img/images/Montre.jpg";
+import Lamplune from "../assets/img/images/LampeLune.webp";
+import Élégant from "../assets/img/images/Élégant.webp";
+import Pinceaux from "../assets/img/images/Pinceaux.webp";
+import rouges from "../assets/img/images/rouges.webp";
+import waterproof from "../assets/img/images/waterproof.jpg";
+import rangement from "../assets/img/images/rangement.jpg";
+import Rihsay from "../assets/img/images/Rihsay.jpg";
+import Extensions from "../assets/img/images/Extensions.webp";
+
+
 export const MyContext = createContext()
 
 export const MyProvider = ({ children }) => {
@@ -209,9 +229,7 @@ export const MyProvider = ({ children }) => {
     ])
 
     const [connected, setConnected] = useState([])
-    console.log(connected);
-    console.log(dataBase);
-
+  
     return (
         <>
             <MyContext.Provider value={[dataBase, setDataBase, connected, setConnected, allPostsDataBase, setAllPostsDataBase, marketPlaceDataBase, setMarketPlaceDataBase, storiesDataBase, setStoriesDataBase, allGroupsDataBase, setallGroupsDataBase,]}>

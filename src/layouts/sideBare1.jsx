@@ -80,9 +80,9 @@ export const SideBare1 = () => {
                             <Link className='font-bold icon  p-3 text-2xl rounded-full mr-2 text-white' to={"/profile"}><CgProfile /></Link>
                             <Link to={"/profile"} className='font-bold text-white'>Profile</Link>
                         </div>
-                        <div className='flex items-center rounded-md hover:bg-[#8e9fbb] transition-all bg-[#475069]' onClick={() => navigat("/Settings")}>
-                            <Link className='font-bold icon  p-3 text-2xl rounded-full mr-2 text-white' to={"/Settings"}><IoMdSettings /></Link>
-                            <Link to={"/Settings"} className='font-bold text-white'>Settings</Link>
+                        <div className='flex items-center rounded-md hover:bg-[#8e9fbb] transition-all bg-[#475069]' onClick={() => navigat("/settings")}>
+                            <Link className='font-bold icon  p-3 text-2xl rounded-full mr-2 text-white' to={"/settings"}><IoMdSettings /></Link>
+                            <Link to={"/settings"} className='font-bold text-white'>Settings</Link>
                         </div>
                         <div className='flex items-center rounded-md hover:bg-[#8e9fbb] transition-all bg-[#475069]' onClick={logOut}>
                             <Link className='font-bold icon  p-3 text-2xl rounded-full mr-2 text-white' to={"/"}><IoLogOutSharp /></Link>
