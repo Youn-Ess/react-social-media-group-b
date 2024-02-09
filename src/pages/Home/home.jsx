@@ -22,7 +22,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { Modal } from 'flowbite-react';
 import { MdAddComment } from 'react-icons/md';
 import { v4 as uuidv4 } from 'uuid';
-import { IoSend } from "react-icons/io5";
+import { IoSend } from 'react-icons/io5';
 
 
 export const HomePage = () => {
@@ -375,7 +375,7 @@ export const HomePage = () => {
                             <div className=" bg-gray-100 w-[40vw] h-fit min-h-[25vh] rounded-lg shadow-md p-4">
                                 <div className="post-header flex gap-3 items-center justify-between bg-gray-100 ms-1 rounded-t-lg p-2">
                                     <div className="flex gap-3 items-center">
-                                        <div className="border-2 border rounded-full w-10 h-10 flex items-center justify-center" style={{ backgroundImage: `url(${element.userPicture ? URL.createObjectURL(element.userPicture) : ""})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                                        <div className="border-2  rounded-full w-10 h-10 flex items-center justify-center" style={{ backgroundImage: `url(${element.userPicture ? URL.createObjectURL(element.userPicture) : ""})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                         <div className="mt-2">
                                             <h3 className='font-bold'>{element.user}</h3>
                                             <p className='opacity-50 text-sm'>{getTimeElapsed(element.date)}</p>
@@ -398,65 +398,65 @@ export const HomePage = () => {
                                         ) : (
                                             // If there are multiple images, render them in a carousel
                                             <Carousel
-                                                className="rounded-xl pt-5"
-                                                prevArrow={({ handlePrev }) => (
-                                                    <IconButton
-                                                        variant="text"
-                                                        color="white"
-                                                        size="lg"
-                                                        onClick={handlePrev}
-                                                        className="!absolute top-2/4 left-4 -translate-y-2/4"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth={2}
-                                                            stroke="currentColor"
-                                                            className="h-6 w-6"
+                                                    className="rounded-xl h- pt-5"
+                                                    prevArrow={({ handlePrev }) => (
+                                                        <IconButton
+                                                            variant="text"
+                                                            color="white"
+                                                            size="lg"
+                                                            onClick={handlePrev}
+                                                            className="!absolute top-2/4 left-4 -translate-y-2/4"
                                                         >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                                                            />
-                                                        </svg>
-                                                    </IconButton>
-                                                )}
-                                                nextArrow={({ handleNext }) => (
-                                                    <IconButton
-                                                        variant="text"
-                                                        color="white"
-                                                        size="lg"
-                                                        onClick={handleNext}
-                                                        className="!absolute top-2/4 !right-4 -translate-y-2/4"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth={2}
-                                                            stroke="currentColor"
-                                                            className="h-6 w-6"
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none"
+                                                                viewBox="0 0 24 24"
+                                                                strokeWidth={2}
+                                                                stroke="currentColor"
+                                                                className="h-6 w-6"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                                                                />
+                                                            </svg>
+                                                        </IconButton>
+                                                    )}
+                                                    nextArrow={({ handleNext }) => (
+                                                        <IconButton
+                                                            variant="text"
+                                                            color="white"
+                                                            size="lg"
+                                                            onClick={handleNext}
+                                                            className="!absolute top-2/4 !right-4 -translate-y-2/4"
                                                         >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                                                            />
-                                                        </svg>
-                                                    </IconButton>
-                                                )}
-                                            >
-                                                {/* Map over each image to render in the carousel */}
-                                                {element.image.map((image, index) => (
-                                                    <div className="">
-                                                        <div className="post-bg-img1 h-[40vh] w-[100%] flex justify-center " style={{ backgroundImage: `url(${URL.createObjectURL(image)})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none"
+                                                                viewBox="0 0 24 24"
+                                                                strokeWidth={2}
+                                                                stroke="currentColor"
+                                                                className="h-6 w-6"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                                                />
+                                                            </svg>
+                                                        </IconButton>
+                                                    )}
+                                                >
+                                                    {/* Map over each image to render in the carousel */}
+                                                    {element.image.map((image, index) => (
+                                                        <div className="">
+                                                            <div className="post-bg-img1 h-[40vh] w-[100%] flex justify-center " style={{ backgroundImage: `url(${URL.createObjectURL(image)})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    // <img className='w-[250px]' key={index} src={URL.createObjectURL(image)} alt="" />
-                                                ))}
-                                            </Carousel>
+                                                        // <img className='w-[250px]' key={index} src={URL.createObjectURL(image)} alt="" />
+                                                    ))}
+                                                </Carousel>
                                         )
                                     )}
                                 </div>
@@ -496,7 +496,7 @@ export const HomePage = () => {
                                                 />
                                             </div>
                                             {/* Pass the post ID to handleSubmit */}
-                                            <button className='text-3xl' onClick={() => handleSubmit(element.id)}><IoSend /></button>
+                                            <button className='text-3xl' onClick={() => handleSubmit(element.id)}><IoSend/></button>
                                         </Modal.Footer>
                                     </Modal>
                                 </div>

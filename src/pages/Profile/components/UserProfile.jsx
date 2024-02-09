@@ -1,11 +1,13 @@
 import { Dialog, DialogBody, DialogFooter, DialogHeader, input } from '@material-tailwind/react';
 import { Button, Carousel, Modal, Textarea } from 'flowbite-react';
-import React, { useContext, useState } from 'react';
-import { FaCheck, FaEye, FaLocationDot, FaPen, FaShare, FaUnlockKeyhole } from 'react-icons/fa6';
+import React, { useContext, useEffect, useState } from 'react';
+import { FaCheck, FaEye, FaGlobe, FaLocationDot, FaPen, FaPenNib, FaShare, FaUnlockKeyhole } from 'react-icons/fa6';
 import { CiEdit } from "react-icons/ci";
 import { MdGroups2 } from 'react-icons/md';
 import { MyContext } from '../../../utils/contextProvider';
-import defaultProfileImage from "../../../assets/img/profile.png"
+import defaultProfileImage from "../../../assets/img/profile.png";
+
+import { ImFilePicture } from "react-icons/im";
 
 
 
@@ -24,6 +26,8 @@ import Heart from 'react-heart';
 import { FaCloudArrowDown } from "react-icons/fa6";
 import { FaRegCommentDots } from "react-icons/fa";
 import { set } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+import { IoSend } from 'react-icons/io5';
 
 
 
@@ -125,6 +129,7 @@ export const UserProfile = () => {
 
     // & if the user uploded more than 5
     const [uploadError, setUploadError] = useState(false);
+    const [uploadError2, setUploadError2] = useState(false);
 
     // Handle file input change event
     const handleFileInputChange = (e) => {
@@ -175,41 +180,72 @@ export const UserProfile = () => {
     //     setStoriesDataBase(tab);
     // }, []);
 
+    let opennopts = false
 
+    const [timeElapsed, setTimeElapsed] = useState('');
+
+    useEffect(() => {
+        // Update time elapsed every second
+        const interval = setInterval(() => {
+            setTimeElapsed(getTimeElapsed(timeElapsed));
+        }, 1000); // Update every second (1000 milliseconds)
+
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+    }, [timeElapsed]);
+
+    // Function to calculate time elapsed since post creation
+    const getTimeElapsed = (postDate) => {
+        const currentDate = new Date();
+        const postCreationDate = new Date(postDate);
+        const timeDifference = currentDate.getTime() - postCreationDate.getTime();
+        const secondsElapsed = Math.floor(timeDifference / 1000); // Convert milliseconds to seconds
+
+        if (secondsElapsed < 60) {
+            return secondsElapsed + 's'; // Show seconds if less than 60 seconds
+        } else {
+            const minutes = Math.floor(secondsElapsed / 60);
+            return minutes + 'm'; // Show minutes if 60 seconds or more
+        }
+    };
 
     console.log(connected);
     console.log(allPostsDataBase);
     console.log(connected[0]);
 
     const createPost = () => {
-        let post = {
-            user: connected[0].userName,
-            userPicture: connected[0].profileImage,
-            description: postDescription,
-            image: postPictute,
-            date: "3 hours ago",
-            likes: {
-                likesNum: 0,
-                users: [],
-                active: false,
-            },
-            comments: {
-                users: [],
+        console.log(postPictute);
+        console.log(postDescription);
+        if (postPictute !== "" || postDescription !== "") {
+            let post = {
+                id: uuidv4(),
+                user: connected[0].userName,
+                userPicture: connected[0].profileImage,
+                description: postDescription,
+                image: postPictute,
+                date: new Date(),
+                likes: {
+                    likesNum: 0,
+                    users: [],
+                    active: false,
+                },
                 comments: [],
             }
+
+            allPostsDataBase.unshift(post)
+            connected[0].myPosts.unshift(post)
+            setOpen(!open);
+            setFiles([])
+            setPostDescription("")
+            setPostPicture("")
+        } else {
+            setUploadError2(true)
+            setTimeout(() => {
+                setUploadError2(false)
+            }, 4000);
         }
-
-        allPostsDataBase.unshift(post)
-        // setConnected(connected[0].myPosts.unshift(post))
-        connected[0].myPosts.unshift(post)
-        // setConnected(connected.myPosts.unshift(post))
-
-        setOpen(!open);
-
-        setFiles([])
-        setPostDescription("")
-        setPostPicture("")
     }
+
 
     // todo stories carousel
 
@@ -244,16 +280,77 @@ export const UserProfile = () => {
         }
     };
 
-
+    const [active, setActive] = useState(false)
 
 
     const [openModal, setOpenModal] = useState(false);
 
     const [theComment, setTheComment] = useState(``);
 
-    const addComment = () => {
 
+
+
+    const addComment = (postId) => {
+        // Find the post in the allPostsDataBase
+        const postIndex = allPostsDataBase.findIndex((post) => post.id === postId);
+        if (postIndex !== -1) {
+            // Get a copy of all posts
+            const updatedPosts = [...allPostsDataBase];
+            // Get the specific post
+            const post = updatedPosts[postIndex];
+            // Add the new comment to the post
+            const newComment = {
+                userName: connected[0].userName,
+                userPicture: connected[0].profileImage,
+                text: theComment,
+            };
+            post.comments.push(newComment);
+            // Update the specific post in the allPostsDataBase state
+            updatedPosts[postIndex] = post;
+            // Update the state of allPostsDataBase
+            setAllPostsDataBase(updatedPosts);
+            // Clear the input
+            setTheComment('');
+        }
     };
+
+    // Render comments for a specific post
+    const renderComments = (postId) => {
+        const post = allPostsDataBase.find((post) => post.id === postId);
+        if (post) {
+            return post.comments.map((comment, index) => (
+                <div className='comment-box pb-4 w-full' key={index}>
+                    <div className=" p-5 border border-e-0 border-s-0 w-full">
+                        <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 border rounded-full" style={{ backgroundImage: `url(${URL.createObjectURL(comment.userPicture)})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                            <p className='mb-2'>{comment.userName}</p>
+                        </div>
+                        <div className='ms-1 w-[100%] break-all '>{comment.text}</div>
+                    </div>
+                </div>
+            ));
+        }
+        return null; // Return null if post is not found
+    };
+
+    // Pass the post ID to the addComment function
+    const handleSubmit = (postId) => {
+        addComment(postId);
+    };
+
+
+
+
+    // Function to open the modal for a specific post
+    const openPostModal = (postId) => {
+        setOpenModal({ ...openModal, [postId]: true });
+    };
+
+    // Function to close the modal for a specific post
+    const closePostModal = (postId) => {
+        setOpenModal({ ...openModal, [postId]: false });
+    };
+
 
 
 
@@ -310,9 +407,9 @@ export const UserProfile = () => {
 
 
                     <div className="accountFoloow w-[75%] h-10 flex justify-center gap-24  text-center items-center">
-                        <div className='h-[100%] w-[10%] flex flex-col justify-center items-center'><b>posts</b> {connected[0].myPosts.length}</div>
-                        <div className='h-[100%] w-[10%] flex flex-col justify-center items-center'><b>followers</b> {connected[0].followers}</div>
-                        <div className='h-[100%] w-[10%] flex flex-col justify-center items-center'><b>follow</b> {connected[0].following}</div>
+                        <div className='h-[100%] w-[10%] flex flex-col-reverse justify-center items-center'><b>posts</b> {connected[0].myPosts.length}</div>
+                        <div className='h-[100%] w-[10%] flex flex-col-reverse justify-center items-center'><b>followers</b> {connected[0].followers.length}</div>
+                        <div className='h-[100%] w-[10%] flex flex-col-reverse justify-center items-center'><b>follow</b> {connected[0].following.length}</div>
                     </div>
                     <p class="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
 
@@ -374,20 +471,20 @@ export const UserProfile = () => {
                         <h4 className='px-2'>See All</h4>
                     </div>
                     <div className=' flex flex-col w-[100%]  p-3' >
-                    {
-                        bioBoolean && (
-                            <div className=' w-[100%] flex justify-between px-2 py-2'>
-                                <input className='rounded focus:bg-gray-300' onChange={(e) => { setBio(e.target.value) }} type="text" />
-                                <button onClick={() => { createBio() }}>confirm</button>
-                            </div>
-                        )
-                    }
-                    <p className='w-[100%] p-4'>{newbio}</p>
+                        {
+                            bioBoolean && (
+                                <div className=' w-[100%] flex justify-between px-2 py-2'>
+                                    <input className='rounded focus:bg-gray-300' onChange={(e) => { setBio(e.target.value) }} type="text" />
+                                    <button onClick={() => { createBio() }}>confirm</button>
+                                </div>
+                            )
+                        }
+                        <p className='w-[100%] p-4'>{newbio}</p>
                     </div>
 
                     <div className="aboutDescription">
                         <div className="aboutDescription1 flex items-center gap-2 pl-6 p-[6px]">
-                            <p className='text-[25px] '><FaUnlockKeyhole /></p>
+                            <p className='text-[25px] '><FaGlobe /></p>
                             <div className="text p-[3px] ">
                                 <h6 className='text-[18px] font-bold cursor-pointer'>Private</h6>
                                 <p className='text-[14px] '>Lorem ipsum dolor sit.</p>
@@ -396,17 +493,17 @@ export const UserProfile = () => {
                         <div className="aboutDescription2 flex items-center gap-2 pl-6 p-[6px]">
                             <p className='text-[25px] '><FaEye /></p>
                             <div className="text p-[3px] ">
-                                <h6 className='text-[18px] font-bold cursor-pointer  ' onClick={()=>{navigate("/home")}}>Visible</h6>
+                                <h6 className='text-[18px] font-bold cursor-pointer  ' onClick={() => { navigate("/home") }}>Visible</h6>
                                 <p className='text-[14px] '>See Posts , photos and updates</p>
                             </div>
                         </div>
-                        <div className="aboutDescription3 flex items-center gap-2 pl-6 p-[6px]"onClick={() => navigate("/Events")}>
+                        <div className="aboutDescription3 flex items-center gap-2 pl-6 p-[6px]" onClick={() => navigate("/Events")}>
                             <p className='text-[25px] '><FaLocationDot /></p>
                             <div className="text p-[3px] ">
                                 <h6 className='text-[18px] font-bold cursor-pointer ' >CasaBlanca, AinSbaa</h6>
                             </div>
                         </div>
-                        <div className="aboutDescription4 flex items-center gap-2 pl-6 p-[6px]" onClick={()=>{navigate("/groups")}}>
+                        <div className="aboutDescription4 flex items-center gap-2 pl-6 p-[6px]" onClick={() => { navigate("/groups") }}>
                             <p className='text-[25px] '><MdGroups2 /></p>
                             <div className="text p-[3px] ">
                                 <h6 className='text-[18px] font-bold '  >General Group</h6>
@@ -464,8 +561,8 @@ export const UserProfile = () => {
                             </div>
                             <div onClick={handleOpen} className="flex items-center border border-gray-900 rounded-lg pb-11 pt-5 h-11 w-[100%] text-black text-opacity-40 cursor-pointer"><p className='ml-3'>what's new {connected[0].userName}...</p></div>
                             <div className="flex w-[100%] justify-start pt-10 gap-12">
-                                <button onClick={handleOpen} className='w-[15%] flex items-center gap-3 text-s font-light text-black text-opacity-70'><div className="w-9 h-9 border rounded-full"></div> Photo</button>
-                                <button onClick={(e) => { handleOpen2(e) }} className='w-[26%] flex items-center gap-3 text-s font-light text-black text-opacity-70'><div className="w-9 h-9 border rounded-full"></div> Write something</button>
+                                <button onClick={handleOpen} className='w-[15%] flex items-center gap-3 text-s font-light text-black text-opacity-70'><div className="w-9 h-9 border rounded-full flex justify-center items-center"><ImFilePicture /></div> Photo</button>
+                                <button onClick={(e) => { handleOpen2(e) }} className='w-[26%] flex items-center gap-3 text-s font-light text-black text-opacity-70'><div className="w-9 h-9 border rounded-full flex justify-center items-center"><FaPenNib /></div> Write something</button>
                             </div>
                         </div>
                     </div>
@@ -529,7 +626,7 @@ export const UserProfile = () => {
                             {/* // && to post */}
                         </DialogFooter>
                     </Dialog>
-                    {/* <Button></Button> */}
+                    
                     {
                         connected[0].myPosts.map((element, index) => (
                             <div className="flex justify-center items-center w-[100%] pt-3 pb-8" key={index}>
@@ -539,14 +636,40 @@ export const UserProfile = () => {
                                             <div className="border-2 border-black rounded-full w-10 h-10 flex items-center justify-center" style={{ backgroundImage: `url(${element.userPicture ? URL.createObjectURL(element.userPicture) : ""})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
                                             <div className="">
                                                 <h3 className=''>{element.user}</h3>
-                                                <p className='opacity-50'>{element.date}</p>
+                                                <p className='opacity-50'>{getTimeElapsed(element.date)}</p>
                                             </div>
                                         </div>
-                                        <div className="text-5xl">
+                                        <div className="text-5xl" onClick={() => {
+                                            opennopts = true
+                                        }}>
                                             <HiDotsCircleHorizontal />
+                                            {
+                                                opennopts && (
+                                                    <Menu>
+                                                        <MenuHandler>
+                                                            <IconButton variant='gradient'>
+                                                                <button
+                                                                    class="align-middle select-none font-sans w-[100%] font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg text-blue-gray-900  shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                                                                    type="button">
+                                                                    <p className="w-[100%]">More</p>
+                                                                    <path
+                                                                        fillRule="evenodd"
+                                                                        d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                                                        clipRule="evenodd"
+                                                                    />
+                                                                </button>
+                                                            </IconButton>
+                                                        </MenuHandler>
+                                                        <MenuList className='flex flex-col'>
+                                                            <MenuItem>
+                                                            </MenuItem>
+                                                        </MenuList>
+                                                    </Menu>
+                                                )
+                                            }
                                         </div>
                                     </div>
-                                    <div className="post-body flex flex-col gap-3">
+                                    <div className="post-body flex h-[40vh] flex-col gap-3">
                                         <p className='p-3'>
                                             {element.description}
                                         </p>
@@ -560,7 +683,7 @@ export const UserProfile = () => {
                                             ) : (
                                                 // If there are multiple images, render them in a carousel
                                                 <Carousel
-                                                    className="rounded-xl pt-5"
+                                                    className="rounded-xl h- pt-5"
                                                     prevArrow={({ handlePrev }) => (
                                                         <IconButton
                                                             variant="text"
@@ -612,8 +735,8 @@ export const UserProfile = () => {
                                                 >
                                                     {/* Map over each image to render in the carousel */}
                                                     {element.image.map((image, index) => (
-                                                        <div className="">
-                                                            <div className="post-bg-img1 h-[40vh] w-[100%] flex justify-center " style={{ backgroundImage: `url(${URL.createObjectURL(image)})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>
+                                                        <div className="h-[40vh]">
+                                                            <div className="post-bg-img1 h-[40vh] bg-black w-[100%] flex justify-center " style={{ backgroundImage: `url(${URL.createObjectURL(image)})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>
                                                             </div>
                                                         </div>
                                                         // <img className='w-[250px]' key={index} src={URL.createObjectURL(image)} alt="" />
@@ -626,38 +749,46 @@ export const UserProfile = () => {
                                         <div className="">
                                             <div onClick={() => handleLikes(element.description, connected[0].userName)} className={`h-fit w-fit flex justify-start items-center px-2 py-1 bg-red-500 bg-opacity-25 cursor-pointer border rounded-md`}>
                                                 <div style={{ width: "1rem" }}>
+                                                    <Heart isActive={element.likes.active} onClick={() => { setActive(!active) }} animationScale={1.2} animationTrigger="both" animationDuration={.2} className={`customHeart${element.likes.active ? " active" : ""}`} />
                                                     {/* Use element.likes.active to determine the active state */}
-                                                    <Heart isActive={element.likes.active} onClick={() => handleLikes(element.description, connected[0].userName)} animationScale={1.2} animationTrigger="both" animationDuration={.2} className={`customHeart${element.likes.active ? " active" : ""}`} />
                                                 </div>
                                                 <span className={`ps-2 text-black text-sm`}>{element.likes.likesNum} Like</span>
                                             </div>
                                         </div>
-
                                         {/* comments */}
                                         <div className="">
-                                            <div onClick={() => setOpenModal(true)} className={`h-fit w-fit flex justify-start items-center  p-1 pe-2 bg-gray-500 bg-opacity-20 cursor-pointer border rounded-md`}>
+                                            <div onClick={() => openPostModal(element.id)} className={`h-fit w-fit flex justify-start items-center  p-1 pe-2 bg-gray-500 bg-opacity-20 cursor-pointer border rounded-md`}>
                                                 <span className={` text-black text-sm flex items-center gap-2 text-[1rem]`}> <span className='text-[1.2rem]'><FaRegCommentDots /> </span><p className='text-sm'>Comments</p> </span>
                                             </div>
                                             {/* modal */}
                                         </div>
-
+                                        <Modal show={openModal[element.id]} size={"md"} onClose={() => closePostModal(element.id)}>
+                                            <Modal.Header>Comments</Modal.Header>
+                                            <Modal.Body>
+                                                <div>
+                                                    {/* Pass the post ID to renderComments */}
+                                                    {renderComments(element.id)}
+                                                </div>
+                                            </Modal.Body>
+                                            <Modal.Footer className=' flex justify-around'>
+                                                <div className="flex gap-3 pe-8">
+                                                    <div className="w-11 h-11 border rounded-full" style={{ backgroundImage: `url(${URL.createObjectURL(connected[0].profileImage)})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+                                                    <textarea
+                                                        value={theComment}
+                                                        onChange={(e) => setTheComment(e.target.value)}
+                                                        placeholder="Write a comment..."
+                                                        className='h-11 border border-black border-opacity-25 rounded'
+                                                    />
+                                                </div>
+                                                {/* Pass the post ID to handleSubmit */}
+                                                <button className='text-3xl' onClick={() => handleSubmit(element.id)}><IoSend /></button>
+                                            </Modal.Footer>
+                                        </Modal>
                                     </div>
                                 </div>
                             </div>
                         ))
                     }
-
-                    {/* //& stories carousel */}
-                    <Modal show={openModal} size={"md"} onClose={() => setOpenModal(false)}>
-                        <Modal.Header>Small modal</Modal.Header>
-                        <Modal.Body>
-                            <input type="text" onChange={(e) => { setTheComment(e.target.value) }} />
-                        </Modal.Body>
-                        <Modal.Footer className=''>
-                            <div className="w-11 h-10 rounded-full border"></div>
-                            <button onClick={addComment}>send</button>
-                        </Modal.Footer>
-                    </Modal>
                 </div >
 
 

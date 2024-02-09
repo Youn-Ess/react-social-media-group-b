@@ -14,6 +14,7 @@ import {
 
 import { HiMiniXMark } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { indexOf } from "lodash";
 
 
 
@@ -134,7 +135,7 @@ export const FillInfos = () => {
                 </div>
 
                 <div className="bg-gray-400 w-[100%]  flex items-center gap-[1rem] p-3 rounded-md flex-wrap">
-                    {newDataBase.map(element =>
+                    {newDataBase.map((element, index) =>
                         <>
                             <Card className="w-[calc((100%_/_4)-1rem)] h-[50vh] flex flex-col justify-between">
                                 <div color="" className="h-[60%] rounded-lg"
@@ -143,11 +144,15 @@ export const FillInfos = () => {
                                 </div>
                                 <CardBody className="flex flex-col p-0 gap-2 items-center">
                                     <Typography variant="h5" color="blue-gray" className="">
-                                        <span>{element.firstName} {element.lastName}</span>
+                                        <span onClick={()=>{navigate("/friendProfile")}}>{element.firstName} {element.lastName}</span>
                                     </Typography>
                                 </CardBody>
                                 <CardFooter className="flex flex-col p-0 gap-2 items-center pb-2">
-                                    <button className="w-[80%] rounded-md bg-blue-gray-200 py-1">Add friend</button>
+                                    <button className="w-[80%] rounded-md bg-blue-gray-200 py-1" onClick={()=>{
+                                        connected[0].following.push(element.firstName)
+                                        console.log(connected[0].followers);
+                                        
+                                    }}>Add friend</button>
                                     <button className="w-[80%] rounded-md bg-blue-gray-200 py-1" onClick={(e) => deleteProfile(e)}>delete</button>
                                 </CardFooter>
                             </Card>
